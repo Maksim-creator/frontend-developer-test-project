@@ -11,10 +11,17 @@ import styles from './ProjectsListView.styles'
 export const ProjectsListView: React.FC<{
   projects: Project[]
   onProjectPress: (project: Project) => void
-}> = ({ projects, onProjectPress }) => {
+  projectName: string
+}> = ({ projects, onProjectPress, projectName }) => {
   const renderItem = useCallback(
-    ({ item }: { item: Project }) => <ProjectItemView project={item} onPress={onProjectPress} />,
-    []
+    ({ item }: { item: Project }) => (
+      <ProjectItemView
+        project={item}
+        onPress={onProjectPress}
+        isSelected={item.name === projectName}
+      />
+    ),
+    [onProjectPress, projectName]
   )
 
   return (
